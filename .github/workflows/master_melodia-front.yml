@@ -13,21 +13,20 @@ jobs:
       CI: false
     permissions:
       contents: read
-
     steps:
       - uses: actions/checkout@v4
-
+      
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
           cache: 'npm'
-
+      
       - name: Install dependencies and build
         run: |
           npm ci --legacy-peer-deps
           npm run build
-
+      
       - name: Verify build folder exists
         run: |
           if [ ! -d "build" ]; then
@@ -35,12 +34,14 @@ jobs:
             ls -la
             exit 1
           fi
-
+          echo "✅ Build folder found:"
+          ls -la build
+      
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: build
+          path: build/
 
   deploy:
     runs-on: ubuntu-latest
@@ -48,23 +49,28 @@ jobs:
     permissions:
       id-token: write
       contents: read
-
     steps:
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: node-app
-
+          path: .
+      
+      - name: Verify downloaded files
+        run: |
+          echo "Downloaded files:"
+          ls -la
+      
       - name: Login to Azure
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_157353C381C24AAD98FEBA2270BD097A }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_B5E894C5696E4FC797D0C7E5B74FCCC9 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_039B3B9446094D449E4023DFE03143EC }}
-
+      
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'melodia-front'
           slot-name: 'Production'
-          package: build
+          package: .
