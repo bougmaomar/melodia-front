@@ -5,7 +5,7 @@ import { API_URL } from 'config';
 import { useNavigate } from 'react-router';
 
 const CLIENT_ID = 'your_spotify_client_id';
-const REDIRECT_URI = 'http://localhost:3000/callback'; // Must match your Spotify settings
+const REDIRECT_URI = 'https://melodia-front-bjahgjdsb3hde6f9.canadacentral-01.azurewebsites.net/callback'; // Must match your Spotify settings
 const SCOPES = 'user-top-read'; // Required scope to read user top tracks
 const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${encodeURIComponent(
   REDIRECT_URI
