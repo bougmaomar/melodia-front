@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const axiosServices = axios.create({ baseURL: process.env.REACT_APP_API_URL || 'https://localhost:3010/' });
+const axiosServices = axios.create({ baseURL: process.env.REACT_APP_API_URL || 'https://melodia-front-bjahgjdsb3hde6f9.canadacentral-01.azurewebsites.net/api' });
 
 axiosServices.interceptors.request.use(
   async (config) => {
