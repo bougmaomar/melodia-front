@@ -16,8 +16,8 @@ export const DRAWER_WIDTH = 280;
 export const MINI_DRAWER_WIDTH = 90;
 export const HEADER_HEIGHT = 74;
 
-export const API_URL = 'http://localhost:5292/api';
-export const API_MEDIA_URL = 'http://localhost:5292/';
+export const API_URL = 'https://melodia-back-bqd2a5c6hmgpegaj.canadacentral-01.azurewebsites.net/api';
+export const API_MEDIA_URL = 'https://melodia-back-bqd2a5c6hmgpegaj.canadacentral-01.azurewebsites.net/';
 
 export const ThemeMode = {
   LIGHT: 'light',
